@@ -5,9 +5,6 @@ describe('Retrive Data from the Amused Test API',function() {
   beforeEach(function() {
     cy.defineApiEndpoint(); //call the end point command 
   });
-
-
-
   it('Get All Objects', function() { 
     cy.request({
       method: 'GET',
