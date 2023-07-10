@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+
+Cypress.Commands.add('defineApiEndpoint', function() {
+    Cypress.env('apiEndpoint', 'https://api.restful-api.dev/objects');
+   
+  });
