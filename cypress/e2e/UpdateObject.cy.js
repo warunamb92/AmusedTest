@@ -8,10 +8,18 @@ describe("Update the Object-PUT Method", function () {
 
 
   before(function () {
-    cy.fixture('/UpdateObject_APIData.json').then(function (UpdateObjectData) {         // call fixture file APIData Json 
+    cy.fixture('/UpdateObjectRequestData.json').then(function (UpdateObjectData) {         // call fixture file APIData Json 
 
       this.UpdateObjectData = UpdateObjectData;
     })
+
+    cy.fixture('/UpdateObjectResponseData.json').then(function (UpdatedResponseObjectData) {         // call fixture file APIData Json 
+
+      this.UpdatedResponseObjectData = UpdatedResponseObjectData;
+    })
+
+
+
   })
 
 
@@ -23,11 +31,14 @@ describe("Update the Object-PUT Method", function () {
       body: this.UpdateObjectData
     }).then((response) => {
 
-      // validate the response status code
+     
 
-      expect(response.status).to.eq(200);
-
-      // validate the created object response 
+      expect(response.status).to.eq(200); // validate the response status code
+      expect(response.body.name).to.eq(this.UpdatedResponseObjectData.name)    // validate name 
+      expect(response.body.data.year).to.deep.equal(this.UpdatedResponseObjectData.year); // validate year
+      expect(response.body.data.price).to.deep.equal(this.UpdatedResponseObjectData.price); // validate price
+      expect(response.body.data.color).to.deep.equal(this.UpdatedResponseObjectData.color);// validate color 
+      
 
 
     })
