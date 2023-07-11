@@ -3,7 +3,7 @@
 
 
 // Add object 
-
+let Objectid;
 describe("Add Object-POST Method",function(){
 
     beforeEach(function () {
@@ -17,6 +17,7 @@ describe("Add Object-POST Method",function(){
       this.CreateObjectData = CreateObjectData;
     })
   })
+
 
     
     it("Add an object",function(){
@@ -34,9 +35,42 @@ describe("Add Object-POST Method",function(){
             // validate the created object response 
             expect(response.body.name).to.eq(this.CreateObjectData.name)    // validate name 
             expect(response.body.data.year).to.deep.equal(this.CreateObjectData._year);// validate year 
-            expect(response.body.data.price).to.deep.equal(this.CreateObjectData._price);// validate price 
+            expect(response.body.data.price).to.deep.equal(this.CreateObjectData._price);// validate price
+
+            Objectid = response.body.id;
+
+
         
         })
+        
 
     })
+})
+
+
+//-------------- in here created Object id will capture and it will be deleted
+describe("Delete the Object-Delete Method", function () {
+ 
+
+  it("Delete exists Object", function () {
+
+    cy.request({
+      method: 'DELETE',
+      url:'https://api.restful-api.dev/objects/'+Objectid, // call env endpoint url in the command of defineApiEndpoint
+   
+    }).then((response) => {
+
+
+      expect(response.status).to.eq(200); // validate the response status code
+      expect(response.body.message).to.equal("Object with id = "+Objectid+" has been deleted.");
+
+    
+
+    })
+
+
+ 
+
+ 
+  })
 })
