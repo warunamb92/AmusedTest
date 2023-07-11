@@ -29,3 +29,4 @@ Cypress.Commands.add('defineApiEndpoint', function() {
     Cypress.env('apiEndpoint', 'https://api.restful-api.dev/objects');
    
   });
+
